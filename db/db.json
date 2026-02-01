@@ -1,0 +1,27 @@
+{
+    "user":[
+
+        {
+            "id":1, 
+            "name": "Admin", 
+            "email":"admin@gmail.com", 
+            "password":"1234",
+            "role": "admin"
+        }
+    ],
+    "events":[
+        {
+            "id":1,
+            "title": "Evento 1",
+            "date": "2026-02-10",
+            "location": "Bogotá",
+            "capacity": 50,
+            "registered": 10
+        }
+
+    ]
+
+
+
+
+}
