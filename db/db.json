@@ -1,27 +1,23 @@
 {
-    "user":[
-
+    "users":[
         {
-            "id":1, 
-            "name": "Admin", 
-            "email":"admin@gmail.com", 
-            "password":"1234",
-            "role": "admin"
+            "id": 1,
+            "email": "admin@gmail.com",
+            "password": "admin",
+            "role":"admin"
         }
     ],
     "events":[
         {
-            "id":1,
-            "title": "Evento 1",
-            "date": "2026-02-10",
-            "location": "Bogotá",
-            "capacity": 50,
-            "registered": 10
+            "id": 1,
+            "title": "Concierto",
+            "description": "badbunny en directo",
+            "date": "",
+            "location": "Medellin",
+            "capacity": 1200,
+            "attendees": 500
+
         }
-
     ]
-
-
-
 
 }
