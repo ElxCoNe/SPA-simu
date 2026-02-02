@@ -107,12 +107,12 @@ async function openEditModal(id) {
 
         modalTitle.textContent = "Edit event";
         eventId.value = ev.id;
-        titleInput.value = ev.title || "";
-        dateInput.value = ev.date || "";
-        locationInput.value = ev.location || "";
-        capacityInput.value = ev.capacity ?? 1;
-        attendeesInput.value = ev.attendees ?? 0;
-        descriptionInput.value = ev.description || "";
+        titleInput.value = ev.title;
+        dateInput.value = ev.date;
+        locationInput.value = ev.location;
+        capacityInput.value = ev.capacity;
+        attendeesInput.value = ev.attendees;
+        descriptionInput.value = ev.description;
 
         formError.textContent = "";
         modal.show();
@@ -140,7 +140,7 @@ async function handleDelete(id) {
         await loadEvents();
     } catch (err) {
         console.error(err);
-        Swal.fire("Error", "Could not delete event.", "error");
+        Swal.fire("Error", "No se puede eliminar el evento, contacte con su administrador", "error");
     }
 }
 
@@ -172,7 +172,7 @@ function renderEvents(events) {
                 <td>${ev.date}</td>
                 <td>${ev.location}</td>
                 <td class="text-truncate" style="max-width: 260px;">
-                    ${v.description}
+                    ${ev.description}
                 </td>
                 <td>${ev.capacity}</td>
                 <td>${ev.attendees}</td>
