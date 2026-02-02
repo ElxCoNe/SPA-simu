@@ -24,7 +24,7 @@ form.addEventListener("submit", async (e) => {
     const password = form.password.value;
 
     if (!email || !password) {
-        Swal.fire("Error", "Please fill all fields.", "error");
+        Swal.fire("Error", "Por favor llena todos los campos", "error");
         return;
     }
 
@@ -36,17 +36,17 @@ form.addEventListener("submit", async (e) => {
         const user = users[0];
 
         if (!user) {
-            Swal.fire("Error", "Wrong credentials.", "error");
+            Swal.fire("Error", "Credenciales incorrectas", "error");
             return;
         }
 
         saveSession(user);
 
-        Swal.fire("Success", "Login successful!", "success").then(() => {
-            redirectByRole(user.role);
-        });
+        await Swal.fire("Success", "Ingreso exitoso!", "success")
+        redirectByRole(user.role);
+
     } catch (err) {
         console.error(err);
-        Swal.fire("Error", "Server error. Try again.", "error");
+        await Swal.fire("Error", "Server error. Try again.", "error");
     }
 });

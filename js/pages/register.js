@@ -19,17 +19,16 @@ form.addEventListener("submit", async (e) => {
     try {
         const existing = await apiGet(`/users?email=${encodeURIComponent(email)}`);
         if (existing.length > 0) {
-            Swal.fire("Error", "Email already registered.", "error");
+            await Swal.fire("Error", "El email ya se encuentra registrado", "error");
             return;
         }
 
         await apiPost("/users", { name, email, password, role });
 
-        Swal.fire("Success", "Account created! You can login now.", "success").then(() => {
-            window.location.href = "../index.html";
-        });
+        await Swal.fire("Success", "Cuenta creada con exito!", "success");
+        window.location.href = "../index.html";
     } catch (err) {
         console.error(err);
-        Swal.fire("Error", "Server error. Try again.", "error");
+        await Swal.fire("Error", "Error en el servidor, vuelve a intentarlo", "error");
     }
 });
