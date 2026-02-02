@@ -2,7 +2,7 @@ import { apiGet, apiPost, apiPatch, apiDelete } from "../core/api.js";
 import { clearSession } from "../core/storage.js";
 import { requireRole } from "../core/guards.js";
 
-requireRole("admin", "../index.html");
+requireRole("admin");
 
 const btnLogout = document.querySelector("#btnLogout");
 const btnCreateEvent = document.querySelector("#btnCreateEvent");
@@ -15,6 +15,7 @@ const modalTitle = document.querySelector("#modalTitle");
 const form = document.querySelector("#eventForm");
 const formError = document.querySelector("#formError");
 
+//MODAL INPUTS
 const eventId = document.querySelector("#eventId");
 const titleInput = document.querySelector("#title");
 const dateInput = document.querySelector("#date");
@@ -84,10 +85,6 @@ form.addEventListener("submit", async (e) => {
 });
 
 function validateEvent(data) {
-    if (!data.title) return "Title is required.";
-    if (!data.date) return "Date is required.";
-    if (!data.location) return "Location is required.";
-
     if (!Number.isInteger(data.capacity) || data.capacity <= 0) return "Capacity must be > 0.";
     if (!Number.isInteger(data.attendees) || data.attendees < 0) return "Attendees must be >= 0.";
     if (data.attendees > data.capacity) return "Attendees cannot exceed capacity.";
@@ -96,7 +93,7 @@ function validateEvent(data) {
 }
 
 function openCreateModal() {
-    modalTitle.textContent = "New event";
+    modalTitle.textContent = "Nuevo evento";
     form.reset();
     eventId.value = "";
     attendeesInput.value = 0;
@@ -153,48 +150,57 @@ async function loadEvents() {
         renderEvents(events);
     } catch (err) {
         console.error(err);
-        Swal.fire("Error", "Could not load events.", "error");
+        Swal.fire("Error", "No se pudieron cargar eventos, contacte son el administrador", "error");
     }
 }
 
 function renderEvents(events) {
-    eventsTbody.innerHTML = "";
-
     if (!events.length) {
         eventsTbody.innerHTML = `
-      <tr>
-        <td colspan="8" class="text-muted">No events found.</td>
-      </tr>
-    `;
+            <tr>
+                <td colspan="8" class="text-muted">No se encontraron eventos</td>
+            </tr>
+        `;
         return;
     }
 
-    events.forEach((ev) => {
-        const tr = document.createElement("tr");
-        tr.innerHTML = `
-      <td>${ev.id}</td>
-      <td>${escapeHtml(ev.title)}</td>
-      <td>${ev.date}</td>
-      <td>${escapeHtml(ev.location)}</td>
-      <td class="text-truncate" style="max-width: 260px;">${escapeHtml(ev.description || "")}</td>
-      <td>${ev.capacity}</td>
-      <td>${ev.attendees}</td>
-      <td class="text-end">
-        <button class="btn btn-sm btn-warning" data-edit="${ev.id}">Edit</button>
-        <button class="btn btn-sm btn-danger" data-delete="${ev.id}">Delete</button>
-      </td>
-    `;
-        eventsTbody.appendChild(tr);
-    });
-}
-
-function escapeHtml(text) {
-    return String(text)
-        .replaceAll("&", "&amp;")
-        .replaceAll("<", "&lt;")
-        .replaceAll(">", "&gt;")
-        .replaceAll('"', "&quot;")
-        .replaceAll("'", "&#039;");
+    eventsTbody.innerHTML = events
+        .map((ev) => `
+            <tr>
+                <td>${ev.id}</td>
+                <td>${ev.title}</td>
+                <td>${ev.date}</td>
+                <td>${ev.location}</td>
+                <td class="text-truncate" style="max-width: 260px;">
+                    ${v.description}
+                </td>
+                <td>${ev.capacity}</td>
+                <td>${ev.attendees}</td>
+                <td class="text-end">
+                    <button class="btn btn-sm btn-warning" data-edit="${ev.id}">Edit</button>
+                    <button class="btn btn-sm btn-danger" data-delete="${ev.id}">Delete</button>
+                </td>
+            </tr>
+        `)
+        .join("");
 }
 
 loadEvents();
+
+
+
+
+
+
+
+
+
+
+// function escapeHtml(text) {
+//     return String(text)
+//         .replaceAll("&", "&amp;")
+//         .replaceAll("<", "&lt;")
+//         .replaceAll(">", "&gt;")
+//         .replaceAll('"', "&quot;")
+//         .replaceAll("'", "&#039;");
+// }

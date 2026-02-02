@@ -1,4 +1,4 @@
-import { API_URL } from "./config";
+import { API_URL } from "./config.js";
 
 // GET
 export async function apiGet(path) {

@@ -2,7 +2,7 @@ import { apiGet } from "../core/api.js";
 import { clearSession } from "../core/storage.js";
 import { requireRole } from "../core/guards.js";
 
-const session = requireRole("user", "../index.html");
+requireRole("user");
 
 
 const menuGrid = document.querySelector("#menuGrid");
