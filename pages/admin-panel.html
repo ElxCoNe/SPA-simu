@@ -1,0 +1,176 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Admin Events</title>
+
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB"
+      crossorigin="anonymous"
+    />
+  </head>
+
+  <body class="bg-light">
+    <header class="container rounded border shadow-sm bg-white mt-3">
+      <div class="row">
+        <div
+          class="col-12 py-2 d-flex justify-content-between align-items-center"
+        >
+          <div class="d-flex gap-2 align-items-center">
+            <img src="../img/shovel-pitchforks.svg" alt="logo" width="28" />
+            <h3 class="fw-bold fs-4 m-0">RestorApp</h3>
+          </div>
+
+          <nav class="d-flex gap-2">
+            <a
+              class="btn btn-sm btn-outline-secondary"
+              href="./admin-panel.html"
+              >Admin Panel</a
+            >
+            <button id="btnLogout" class="btn btn-sm btn-outline-dark">
+              Log out
+            </button>
+          </nav>
+        </div>
+      </div>
+    </header>
+
+    <main class="container my-4">
+      <div
+        class="d-flex align-items-start justify-content-between flex-wrap gap-3 mb-3"
+      >
+        <div>
+          <h1 class="display-6 fw-bold m-0">Events CRUD</h1>
+          <p class="text-muted m-0">Crear, editar y eliminar eventos.</p>
+        </div>
+
+        <div class="d-flex gap-2">
+          <button id="btnCreateEvent" class="btn btn-success">New event</button>
+        </div>
+      </div>
+
+      <!-- TABLE -->
+      <div class="card border-0 shadow-sm rounded-4">
+        <div class="card-body">
+          <div class="table-responsive">
+            <table class="table align-middle">
+              <thead class="table-light">
+                <tr>
+                  <th style="width: 70px">ID</th>
+                  <th style="width: 180px">Title</th>
+                  <th style="width: 120px">Date</th>
+                  <th style="width: 160px">Location</th>
+                  <th>Description</th>
+                  <th style="width: 120px">Capacity</th>
+                  <th style="width: 120px">Attendees</th>
+                  <th class="text-end" style="width: 170px">Actions</th>
+                </tr>
+              </thead>
+
+              <tbody id="eventsTbody">
+                <!-- EVENTS RENDERED HERE -->
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <!-- MODAL -->
+    <div class="modal fade" id="eventModal" tabindex="-1" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content rounded-4">
+          <div class="modal-header">
+            <h5 class="modal-title fw-bold" id="modalTitle">New event</h5>
+            <button
+              class="btn-close"
+              data-bs-dismiss="modal"
+              aria-label="Close"
+            ></button>
+          </div>
+
+          <form id="eventForm">
+            <div class="modal-body">
+              <input type="hidden" id="eventId" />
+
+              <div class="mb-3">
+                <label class="form-label" for="title">Title</label>
+                <input id="title" class="form-control" required />
+              </div>
+
+              <div class="mb-3">
+                <label class="form-label" for="date">Date</label>
+                <input id="date" type="date" class="form-control" required />
+              </div>
+
+              <div class="mb-3">
+                <label class="form-label" for="location">Location</label>
+                <input id="location" class="form-control" required />
+              </div>
+
+              <div class="mb-3">
+                <label class="form-label" for="capacity">Capacity</label>
+                <input
+                  id="capacity"
+                  type="number"
+                  min="1"
+                  class="form-control"
+                  required
+                />
+              </div>
+
+              <div class="mb-3">
+                <label class="form-label" for="attendees">Attendees</label>
+                <input
+                  id="attendees"
+                  type="number"
+                  min="0"
+                  value="0"
+                  class="form-control"
+                  required
+                />
+              </div>
+
+              <div class="mb-3">
+                <label class="form-label" for="description">Description</label>
+                <textarea
+                  id="description"
+                  rows="3"
+                  class="form-control"
+                ></textarea>
+              </div>
+
+              <div class="small text-danger" id="formError"></div>
+            </div>
+
+            <div class="modal-footer">
+              <button
+                type="button"
+                class="btn btn-light border"
+                data-bs-dismiss="modal"
+              >
+                Cancel
+              </button>
+              <button type="submit" class="btn btn-success" id="btnSave">
+                Save
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
+      crossorigin="anonymous"
+    ></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+    <!-- IMPORTANT: module script -->
+    <script type="module" src="../js/pages/admin-panel.js"></script>
+  </body>
+</html>

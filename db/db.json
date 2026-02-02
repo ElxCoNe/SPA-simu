@@ -1,23 +1,29 @@
 {
-    "users":[
-        {
-            "id": 1,
-            "email": "admin@gmail.com",
-            "password": "admin",
-            "role":"admin"
-        }
-    ],
-    "events":[
-        {
-            "id": 1,
-            "title": "Concierto",
-            "description": "badbunny en directo",
-            "date": "",
-            "location": "Medellin",
-            "capacity": 1200,
-            "attendees": 500
-
-        }
-    ]
-
+  "users": [
+    {
+      "id": 1,
+      "name": "user",
+      "email": "admin@gmail.com",
+      "password": "admin",
+      "role": "admin"
+    },
+    {
+      "id": 2,
+      "name": "Admin",
+      "email": "user@gmail.com",
+      "password": "user",
+      "role": "user"
+    }
+  ],
+  "events": [
+    {
+      "title": "willyrex con hielo",
+      "date": "1999-02-04",
+      "location": "medllao",
+      "capacity": 1500,
+      "attendees": 1000,
+      "description": "uwu",
+      "id": 1
+    }
+  ]
 }
